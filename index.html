@@ -1,12 +1,13 @@
 <html>
 <SCRIPT>
     var pos = 0;
+    var BreakException = {};
     const pacArray = [
         ['PacMan1.png', 'PacMan2.png'],
         ['PacMan3.png', 'PacMan4.png']
     ];
     var direction = 0;
-    const pacMen = []; // This array holds all the pacmen
+    var pacMen = []; // This array holds all the pacmen
 
     function setToRandom(scale) {
         return {
@@ -38,19 +39,68 @@
             newimg
         }
     }
+    function checkHit(item, index) {
+        for (let i = 0; i < pacMen.length; i++) {
+            if (isHit(item, pacMen[i]) && i != index) {
+                let v1 = item.velocity.x;
+                let v2 = pacMen[i].velocity.x;
+                let p1 = item.position.x;
+                let p2 = pacMen[i].position.x;
+                if (v1 < 0 && v2 < 0) {
+                    if (p1 > p2) {
+                        item.newimg.width += pacMen[i].newimg.width;
+                        kill(pacMen[i]);
+                    }
+                    if (p1 < p2) {
+                        pacMen[i].newimg.width += item.newimg.width;
+                        kill(pacMen[index]);
+                    }
+                }
+                if (v1 > 0 && v2 > 0) {
+                    if (p1 > p2) {
+                        pacMen[i].newimg.width += item.newimg.width;
+                        kill(index);
+                    }
+                    if (p1 < p2) {
+                        item.newimg.width += pacMen[i].newimg.width;
+                        kill(i);
+                    }
+                }
+                if (v1 < 0 && v2 > 0 || v1 > 0 && v2 < 0) {
+                    pacMen[i].velocity.x = - pacMen[i].velocity.x;
+                    item.velocity.x = - item.velocity.x;
+                }
+            }
+        }
 
+    }
+    function isHit(obj1, obj2) {
+        if (Math.abs(obj1.position.x - obj2.position.x) < (obj2.newimg.width + obj1.newimg.width) / 4) {
+            if (Math.abs(obj1.position.y - obj2.position.y) < (obj1.newimg.height + obj2.newimg.height) / 4) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function kill(item) {
+        pacMen[item].newimg.width = 0;
+        pacMen[item].newimg.width = 0;
+        pacMen[item].velocity.x = 0;
+        pacMen[item].velocity.y = 0;
+    }
     function update() {
         //loop over pacmen array and move each one and move image in DOM
-        pacMen.forEach((item) => {
+        pacMen.forEach((item, index) => {
+            checkHit(item, index);
             checkCollisions(item)
-            if(!item.changer){
-                item.changer=1;
+            if (!item.changer) {
+                item.changer = 1;
             }
-            else if(item.changer === 1){
-                item.changer=0;
+            else if (item.changer === 1) {
+                item.changer = 0;
             }
-            else if(item.changer === 0){
-                item.changer =1;
+            else if (item.changer === 0) {
+                item.changer = 1;
             }
             if (item.velocity.x > 0) {
                 item.newimg.src = pacArray[0][item.changer];
@@ -63,17 +113,17 @@
 
             item.newimg.style.left = item.position.x;
             item.newimg.style.top = item.position.y;
-        })
+        });
         setTimeout(update, 100);
     }
 
     function checkCollisions(item) {
-     
-        if(item.position.x+item.velocity.x > window.innerWidth-item.newimg.width || item.position.x+item.velocity.x < 0){
-            item.velocity.x  = - item.velocity.x 
+
+        if (item.position.x + item.velocity.x > window.innerWidth - item.newimg.width || item.position.x + item.velocity.x < 0) {
+            item.velocity.x = - item.velocity.x
         }
-        if(item.position.y+item.velocity.y < 0 || item.position.y > window.innerHeight-item.newimg.height){
-            item.velocity.y  = - item.velocity.y;
+        if (item.position.y + item.velocity.y < 0 || item.position.y > window.innerHeight - item.newimg.height) {
+            item.velocity.y = - item.velocity.y;
         }
     }
 
