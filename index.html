@@ -49,21 +49,21 @@
                 if (v1 < 0 && v2 < 0) {
                     if (p1 > p2) {
                         item.newimg.width += pacMen[i].newimg.width;
-                        kill(index);
+                        kill(i);
                     }
                     if (p1 < p2) {
                         pacMen[i].newimg.width += item.newimg.width;
-                        kill(i);
+                        kill(index);
                     }
                 }
                 if (v1 > 0 && v2 > 0) {
                     if (p1 > p2) {
                         pacMen[i].newimg.width += item.newimg.width;
-                        kill(i);
+                        kill(index);
                     }
                     if (p1 < p2) {
                         item.newimg.width += pacMen[i].newimg.width;
-                        kill(index);
+                        kill(i);
                     }
                 }
                 if (v1 < 0 && v2 > 0 || v1 > 0 && v2 < 0) {
