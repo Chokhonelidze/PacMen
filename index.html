@@ -111,7 +111,8 @@
         pacMen[item].newimg.height = 0;
         pacMen[item].velocity.x = 0;
         pacMen[item].velocity.y = 0;
-        pacMen[item].position.x = - 200;    
+        pacMen[item].position.x = - 200;  
+        document.getElementById('game').removeChild(pacMen[item].newimg);  
     }
     function update() {
         //loop over pacmen array and move each one and move image in DOM
