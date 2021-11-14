@@ -6,6 +6,9 @@
         ['PacMan1.png', 'PacMan2.png'],
         ['PacMan3.png', 'PacMan4.png']
     ];
+    const blods = [
+        'BLOD.png'
+    ]
     var direction = 0;
     var pacMen = []; // This array holds all the pacmen
 
@@ -39,6 +42,23 @@
             newimg
         }
     }
+    function createBlod(position,size){
+        let game = document.getElementById("game");
+        let blod = document.createElement('img');
+        blod.style.position = 'absolute';
+        blod.src = 'BLOD.png';
+        blod.width = size;
+        blod.style.zIndex = -1;
+        blod.style.left = position.x;
+        blod.style.top = position.y;
+        game.appendChild(blod);
+        setTimeout(clearBlod,8000,blod);
+
+    }
+    function clearBlod(blod){
+        let game = document.getElementById("game");
+        game.removeChild(blod);
+    }
     function checkHit(item, index) {
         for (let i = 0; i < pacMen.length; i++) {
             if (isHit(item, pacMen[i]) && i != index) {
@@ -48,21 +68,25 @@
                 let p2 = pacMen[i].position.x;
                 if (v1 < 0 && v2 < 0) {
                     if (p1 > p2) {
-                        item.newimg.width += pacMen[i].newimg.width;
+                        item.newimg.width += 10;
+                        createBlod(pacMen[i].position,pacMen[i].newimg.width);
                         kill(i);
                     }
                     if (p1 < p2) {
-                        pacMen[i].newimg.width += item.newimg.width;
+                        pacMen[i].newimg.width += 10;
+                        createBlod(item.position,item.newimg.width);
                         kill(index);
                     }
                 }
                 if (v1 > 0 && v2 > 0) {
                     if (p1 > p2) {
-                        pacMen[i].newimg.width += item.newimg.width;
+                        pacMen[i].newimg.width += 10;
+                        createBlod(item.position,item.newimg.width);
                         kill(index);
                     }
                     if (p1 < p2) {
-                        item.newimg.width += pacMen[i].newimg.width;
+                        item.newimg.width += 10;
+                        createBlod(pacMen[i].position,pacMen[i].newimg.width);
                         kill(i);
                     }
                 }
