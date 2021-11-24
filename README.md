@@ -1,9 +1,13 @@
 # pacmen
-Factory for making pacmen
-You are given a starter.html code.
-When button "make one" is pressed you need to complete the code 
-to position the new pacman image and add it to the "game" div. It is then added to the array of pacmen, which keeps track of the position and velocity of each pacman.
-You also need to make each pacman bounce off any wall it hits. 
-Start by getting at least one pacman positioned and viewable. 
+this is a small game containing two buttons Add PacMan and StartGame
+button Add PacMan lets users add new PacMan to a game. 
+The rules of the game are simple.
+only one Pacman survives.
+they retreat when they are facing each other and attack when they snick each other from behind.
 
-<img src="PacMan1.png">
+there are no dependences and the program can run on any browser.
+
+the rules of the software can change it may also include teams of PacMan fighting for domination.
+in addition, when the same color, Pacmen from the same team, will face each other they could add child PacMan.
+
+<img src="images/PacMan1.png">
