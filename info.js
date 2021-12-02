@@ -21,7 +21,7 @@ function info1() {
     "info1",
     0,
     -150,
-    "Click this button and add PacMen to game"
+    "Click this button and add PacMen to a game"
   );
   setTimeout(destroy, 8000, "info1");
   if (!info) return true;
