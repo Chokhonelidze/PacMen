@@ -1,7 +1,12 @@
+@font-face {
+    font-family: "YujiMai";
+    src: url(YujiMai-Regular.ttf);
+}
 body {
     display:grid;
     grid-template-columns: 2fr 4fr 2fr;
     grid-template-rows: 200px 1000px;
+    font-family:'YujiMai';
 }
 .header{
     grid-column: 2;
@@ -24,6 +29,8 @@ body {
     background-color:#659EC7;
     height:100px;
     width:200px;
+    padding:5px;
+    border-radius: 10%;
 }
 .hero:after {
     z-index: -1;
