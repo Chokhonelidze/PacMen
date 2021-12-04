@@ -45,3 +45,8 @@ body {
     border-left: solid 10px transparent;
     border-right: solid 10px transparent;
 }
+@media screen and (max-width: 1000px) {
+    body {
+        grid-template-rows: 250px 1000px;
+    }
+}
